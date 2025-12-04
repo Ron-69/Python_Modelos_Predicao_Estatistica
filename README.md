@@ -85,7 +85,7 @@ Essa divergência é causada pela **diferença fundamental** entre os dois *data
 O Elastic Net é projetado para encontrar a melhor **mistura** ($\alpha$) de penalidades L1 e L2.
 
 * No **Boston Housing (R)**, o Elastic Net otimizou para um modelo **majoritariamente Ridge** ($\alpha \approx 0.11$), confirmando que a penalidade L2 (estabilidade) é mais importante.
-* No **California Housing (Python)**, o Lasso e o Elastic Net (que otimizou para ser Lasso Puro: $\text{L1\_Ratio}=1.0$) tiveram um desempenho **muito inferior** ao Ridge (L2).
+No **California Housing (Python)**, o Lasso e o Elastic Net (que otimizou para ser Lasso Puro: $\text{L1}_{\text{Ratio}}=1.0$) tiveram um desempenho **muito inferior** ao Ridge (L2).
 
 **Conclusão Consolidada:**
 
