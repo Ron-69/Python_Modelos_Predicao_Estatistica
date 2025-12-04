@@ -119,3 +119,22 @@ O **XGBoost (Gradient Boosting)** demonstrou ser o modelo mais eficaz:
 2.  **Melhor Precisão (RMSE):** Obteve o menor erro médio de previsão ($\mathbf{0.4642}$), superando todos os outros modelos testados, incluindo o Random Forest.
 
 A estratégia de **Gradient Boosting** será a base para as previsões finais do projeto.
+
+---
+### 💉 Modelos Probabilísticos para Classificação (Pima Indians Diabetes)
+
+O *dataset* Pima Indians Diabetes foi utilizado para a classificação binária (Diabetes: Sim/Não), aplicando modelos que estimam probabilidades.
+
+#### Comparativo de Desempenho (Pima Indians Diabetes - Probabilísticos)
+
+| Modelo | Penalidade | Métrica de Otimização | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Naive Bayes** | Nenhuma | N/A | $0.8088$ | $0.7446$ | $\mathbf{0.62}$ |
+| **Regressão Logística** | L2 ($C=1.0$) | AUC-ROC | $\mathbf{0.8380}$ | $\mathbf{0.7446}$ | $0.52$ |
+
+#### Conclusão Parcial
+
+1.  **Regressão Logística** demonstrou ser superior em **capacidade de distinção** entre as classes (maior **AUC-ROC: 0.8380**).
+2.  O **Naive Bayes** apresentou um **Recall** superior para a classe alvo (Diabetes: $\mathbf{0.62}$), indicando que ele é mais eficaz em capturar casos positivos reais (menos falsos negativos).
+
+A **Regressão Logística** é o modelo probabilístico com melhor desempenho geral.
