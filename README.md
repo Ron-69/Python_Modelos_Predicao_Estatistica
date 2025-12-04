@@ -95,3 +95,27 @@ Em ambos os *datasets*, a abordagem vencedora foi **priorizar a penalidade Ridge
 * O **California Housing** demonstrou que o **Ridge Puro** é o mais robusto e preditivo, confirmando que a estabilidade é a chave para o melhor desempenho em ambos os contextos.
 
 ---
+
+### 🚀 Regressão Não Linear e Métodos de Ensemble
+
+Os modelos de Regressão Não Linear (KNN) e os Métodos de Ensemble (Random Forest e XGBoost) foram aplicados ao *dataset* California Housing para capturar relações mais complexas e atingir maior precisão.
+
+#### Comparativo de Desempenho (California Housing)
+
+A tabela abaixo resume os resultados de desempenho em comparação com o modelo Linear mais forte (Ridge):
+
+| Modelo | Tipo | Melhor Parâmetro | R² (Teste) | RMSE (Teste) | Variação R² (vs. Ridge) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Ridge (L2)** | Linear | $\lambda=4.3288$ | $0.5959$ | $0.5305$ | Base Linear |
+| **KNN** | Não Linear | $K=11$ | $0.6869$ | $0.6411$ | $+9.1$ p.p. |
+| **Random Forest** | Ensemble | $n_{est}=200, depth=20$ | $0.8060$ | $0.5046$ | $+21.0$ p.p. |
+| **XGBoost** | **Ensemble (Boosting)** | $lr=0.1, n_{est}=200, depth=5$ | $\mathbf{0.8358}$ | $\mathbf{0.4642}$ | $\mathbf{+24.0}$ p.p. |
+
+#### Conclusão Global: Modelo Preditivo Vencedor
+
+O **XGBoost (Gradient Boosting)** demonstrou ser o modelo mais eficaz:
+
+1.  **Melhor Explicação (R²):** Explica $\mathbf{83,58\%}$ da variância no preço das casas, indicando uma excelente capacidade de modelar as relações complexas do *dataset*.
+2.  **Melhor Precisão (RMSE):** Obteve o menor erro médio de previsão ($\mathbf{0.4642}$), superando todos os outros modelos testados, incluindo o Random Forest.
+
+A estratégia de **Gradient Boosting** será a base para as previsões finais do projeto.
