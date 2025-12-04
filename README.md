@@ -121,6 +121,64 @@ O **XGBoost (Gradient Boosting)** demonstrou ser o modelo mais eficaz:
 A estratégia de **Gradient Boosting** será a base para as previsões finais do projeto.
 
 ---
+### 🌳 Classificação Não Linear(KNN) e Métodos de Ensemble (Random Forest e XGBoost)
+
+O **XGBoost (Gradient Boosting)** e o **Random Forest** foram aplicados ao *dataset* Pima Indians Diabetes para explorar o poder dos métodos Não_Linear e de árvore no problema de classificação.
+
+### 🌐 Classificação com K-Nearest Neighbors (KNN)
+
+O modelo KNN, classificado como Não Linear, foi treinado para determinar seu poder preditivo no *dataset* Pima Indians Diabetes.
+
+#### Resultados do KNN Classifier
+
+| Métrica | Resultado |
+| :--- | :--- |
+| **Melhor Parâmetro** | $K=21$ (weights: 'distance') |
+| **Acurácia (Teste)** | $\mathbf{0.7706}$ |
+| **AUC-ROC (Teste)** | $0.8127$ |
+| **Recall (Classe 1 - Diabetes)** | $0.54$ |
+
+#### Conclusão do KNN
+
+O KNN alcançou a **maior Acurácia ($\mathbf{77.06\%}$) de todos os modelos** testados. O modelo se beneficia de um grande número de vizinhos ($K=21$), sugerindo que a fronteira de decisão é relativamente suave e que a votação por distância (peso maior para vizinhos mais próximos) é a mais eficaz.
+
+#### Comparativo de Desempenho (Ensemble)
+
+| Modelo | Parâmetros Otimizados | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1 - Diabetes) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Random Forest** | $n_{est}=100, depth=5$ | $0.8305$ | $0.7359$ | $0.49$ |
+| **XGBoost** | $lr=0.05, n_{est}=100, depth=3$ | $\mathbf{0.8416}$ | $\mathbf{0.7576}$ | $0.54$ |
+
+#### Conclusão do Ensemble
+
+O **XGBoost** demonstrou ser o modelo de árvore mais poderoso para este problema, superando o Random Forest em todas as métricas gerais de desempenho.
+
+### 💉 Modelos de Classificação (Pima Indians Diabetes)
+
+O objetivo desta etapa foi classificar se um paciente indígena Pima seria diagnosticado com diabetes (Classe 1), utilizando modelos Probabilísticos, Não Lineares (KNN) e de Ensemble.
+
+#### Resultados Consolidados
+
+| Modelo | Categoria | Melhor Parâmetro | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Naive Bayes** | Probabilístico | N/A | $0.8088$ | $0.7446$ | $\mathbf{0.62}$ |
+| **Regressão Logística** | Probabilístico | $C=1.0$ | $0.8380$ | $0.7446$ | $0.52$ |
+| **KNN** | **Não Linear** | $K=21, weights=distance$ | $0.8127$ | $\mathbf{0.7706}$ | $0.54$ |
+| **Random Forest** | Ensemble | $n_{est}=100, depth=5$ | $0.8305$ | $0.7359$ | $0.49$ |
+| **XGBoost** | **Ensemble (Boosting)** | $lr=0.05, n_{est}=100, depth=3$ | $\mathbf{0.8416}$ | $0.7576$ | $0.54$ |
+
+#### Conclusão Geral da Classificação
+
+Os modelos de classificação apresentam um *trade-off* claro:
+
+1.  **Melhor Capacidade de Distinção (AUC-ROC):** O **XGBoost** é o vencedor ($\mathbf{0.8416}$), sendo o mais eficaz em ranquear corretamente as probabilidades de diabetes.
+2.  **Melhor Precisão Geral (Acurácia):** O **KNN** alcança a maior acurácia ($\mathbf{0.7706}$), sendo o modelo que mais frequentemente acerta a previsão final.
+3.  **Melhor Identificação de Positivos (Recall):** O **Naive Bayes** é o mais adequado se a prioridade for **minimizar Falsos Negativos** (Recall: $\mathbf{0.62}$).
+
+O **XGBoost** é o modelo de melhor performance geral (AUC-ROC), mas o **KNN** oferece a maior taxa de acerto.
+
+---
+
 ### 💉 Modelos Probabilísticos para Classificação (Pima Indians Diabetes)
 
 O *dataset* Pima Indians Diabetes foi utilizado para a classificação binária (Diabetes: Sim/Não), aplicando modelos que estimam probabilidades.
