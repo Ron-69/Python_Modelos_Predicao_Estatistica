@@ -41,3 +41,57 @@ Esta seção compara o modelo Linear Múltiplo (que foi o melhor ajuste linear) 
 3.  **Estratégia Ideal:** Para o *dataset* `mtcars`, a **combinação de *features* independentes** ($\text{wt}$ e $\text{hp}$) foi significativamente mais eficaz para reduzir o erro de previsão do que tentar modelar a forma não-linear de um único *feature* ($\text{hp}$). O modelo Polinomial de 3º Grau, além de não ser significativo, teve o pior desempenho.
 
 ---
+### 📈 Regularização de Modelos (Ridge, Lasso e Elastic Net)
+
+Os modelos de regularização foram aplicados ao *dataset* California Housing para otimizar a performance, prevenir o *overfitting* e realizar a seleção de *features*.
+
+#### Comparativo de Desempenho (California Housing)
+
+| Modelo | Penalidade | Melhor Alpha ($\lambda$) | L1 Ratio ($\alpha$) | RMSE (Teste) | R² (Teste) | Seleção de Features |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Ridge (L2)** | $L2$ | $4.3288$ | $0.0000$ | $\mathbf{0.5305}$ | $0.5959$ | Encolhe (não zera) |
+| **Lasso (L1)** | $L1$ | $0.0027$ | $1.0000$ | $0.7270$ | $0.5973$ | $\text{Population}$ zerada |
+| **Elastic Net** | $L1 + L2$ | $0.0027$ | $\mathbf{1.0000}$ | $0.7270$ | $0.5973$ | $\text{Population}$ zerada |
+
+#### Conclusão Final da Regularização
+
+1.  **Modelo Vencedor:** A **Regressão Ridge (L2)** se mostrou o **modelo preditivo superior**, com o menor erro (RMSE de $\mathbf{0.5305}$). Isso sugere que, para este *dataset*, é melhor manter todas as *features*, apenas encolhendo seus pesos.
+2.  **Lasso e Elastic Net:** Ambos otimizaram para o mesmo ponto (Elastic Net otimizou para ser Lasso puro, $\mathbf{L1\_Ratio=1.0}$), zerando o peso da variável $\text{Population}$. No entanto, essa remoção resultou em uma perda significativa na precisão ($\text{RMSE}$ $\mathbf{\approx 37\%}$ maior).
+
+O modelo **Ridge** será o modelo escolhido para a fase de *deployment* e produção, devido à sua precisão superior.
+
+## 📊 Diferença de Resultados Devido à Troca de Datasets
+
+Os resultados da regularização (Ridge, Lasso e Elastic Net) obtidos em **Python (California Housing)** e em **R (Boston Housing)** apresentaram uma diferença significativa na escolha do modelo de penalidade ideal.
+
+Essa divergência é causada pela **diferença fundamental** entre os dois *datasets* utilizados: o **tamanho amostral** e o **contexto dos dados**.
+
+---
+
+### 1. Comportamento Ideal da Penalidade por Dataset
+
+| Característica | Boston Housing (R) | California Housing (Python) |
+| :--- | :--- | :--- |
+| **Tamanho Amostral ($N$)** | Pequeno ($N=506$) | Grande ($\mathbf{N=20.640}$) |
+| **Ideal de Regularização** | **Elastic Net (L2-Dominante)** | **Ridge (L2)** |
+| **Melhor L1 Ratio ($\alpha$)** | $\mathbf{0.1111}$ ($\approx 90\%$ L2) | $\mathbf{0.0000}$ (Ridge Puro) |
+| **Motivo** | Prioriza a **estabilidade (L2)** em *datasets* pequenos, pois a exclusão de *features* pelo Lasso é arriscada. | Prioriza a **estabilidade (L2)** para o menor erro. O Lasso teve perda preditiva significativa ao remover o *feature* `Population`. |
+| **Vencedor Final** | Elastic Net (RMSE: 5.179) | **Ridge** (RMSE: 0.5305) |
+
+---
+
+### 2. Implicações da Divergência
+
+O Elastic Net é projetado para encontrar a melhor **mistura** ($\alpha$) de penalidades L1 e L2.
+
+* No **Boston Housing (R)**, o Elastic Net otimizou para um modelo **majoritariamente Ridge** ($\alpha \approx 0.11$), confirmando que a penalidade L2 (estabilidade) é mais importante.
+* No **California Housing (Python)**, o Lasso e o Elastic Net (que otimizou para ser Lasso Puro: $\text{L1\_Ratio}=1.0$) tiveram um desempenho **muito inferior** ao Ridge (L2).
+
+**Conclusão Consolidada:**
+
+Em ambos os *datasets*, a abordagem vencedora foi **priorizar a penalidade Ridge (L2)**, que **encolhe** os coeficientes sem zerá-los.
+
+* O **Boston Housing** exigiu o Elastic Net para encontrar essa **dominância L2**.
+* O **California Housing** demonstrou que o **Ridge Puro** é o mais robusto e preditivo, confirmando que a estabilidade é a chave para o melhor desempenho em ambos os contextos.
+
+---
