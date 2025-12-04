@@ -218,4 +218,64 @@ Os modelos de classificação apresentam um *trade-off* claro:
 O **XGBoost** é o modelo de melhor performance geral (AUC-ROC), mas o **KNN** oferece a maior taxa de acerto.
 
 ---
+### 📏 Modelo de Margem: Support Vector Machine (SVM)
 
+O **SVM** (SVC) busca o hiperplano que maximiza a margem entre as classes. A otimização selecionou um kernel linear com alta penalidade de erro, similar aos modelos lineares tradicionais.
+
+#### Resultados do SVM Classifier
+
+| Métrica | Resultado |
+| :--- | :--- |
+| **Melhor Parâmetro** | $C=10.0$, **kernel**: **`linear`** |
+| **Acurácia (Teste)** | $0.7359$ |
+| **AUC-ROC (Teste)** | $0.8346$ |
+| **Recall (Classe 1 - Diabetes)** | $0.49$ |
+
+#### Conclusão do SVM
+
+O SVM, com seu kernel linear, demonstrou um desempenho de distinção (**AUC-ROC: 0.8346**) muito próximo ao da Regressão Logística, mas com um baixo Recall, indicando que a separação linear é eficaz, porém limitada na identificação dos casos positivos mais difíceis.
+
+---
+
+### 🌲 Árvore de Decisão (Decision Tree Classifier)
+
+A Árvore de Decisão, como modelo fundamental para os métodos de Ensemble, foi otimizada para identificar a profundidade ideal no problema de classificação.
+
+#### Resultados da Árvore de Decisão
+
+| Métrica | Resultado |
+| :--- | :--- |
+| **Melhor Parâmetro** | $max\_depth=5, min\_samples\_split=10$ |
+| **Acurácia (Teste)** | $0.7619$ |
+| **AUC-ROC (Teste)** | $0.8149$ |
+| **Recall (Classe 1 - Diabetes)** | $0.44$ |
+
+#### Conclusão da Árvore
+
+Embora a acurácia seja alta ($\approx 76.2\%$), o baixo Recall da Classe 1 ($0.44$) indica que o modelo de árvore pura tem dificuldade em generalizar os casos positivos de forma isolada, justificando a necessidade dos métodos de Ensemble (Random Forest e XGBoost) para melhorar a estabilidade e a performance.
+
+---
+
+### 💉 Modelos de Classificação (Pima Indians Diabetes)
+
+A análise comparativa final no *dataset* Pima Indians Diabetes incluiu 7 modelos de diferentes categorias para a classificação binária de diabetes.
+
+#### Resultados Consolidados Finais
+
+| Modelo | Categoria | Melhor Parâmetro | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Naive Bayes** | Probabilístico | N/A | $0.8088$ | $0.7446$ | $\mathbf{0.62}$ |
+| **Regressão Logística** | Probabilístico | $C=1.0$ | $0.8380$ | $0.7446$ | $0.52$ |
+| **Decision Tree** | **Árvore** | $max\_depth=5, min\_samples\_split=10$ | $0.8149$ | $0.7619$ | $0.44$ |
+| **KNN** | Não Linear | $K=21, weights=distance$ | $0.8127$ | $\mathbf{0.7706}$ | $0.54$ |
+| **SVM (SVC)** | Margem/Distância | $C=10.0, kernel=linear$ | $0.8346$ | $0.7359$ | $0.49$ |
+| **Random Forest** | Ensemble | $n_{est}=100, depth=5$ | $0.8305$ | $0.7359$ | $0.49$ |
+| **XGBoost** | Ensemble (Boosting) | $lr=0.05, n_{est}=100, depth=3$ | $\mathbf{0.8416}$ | $0.7576$ | $0.54$ |
+
+#### Conclusão Geral da Classificação (Final)
+
+O modelo de melhor desempenho é o **XGBoost**, que alcançou o maior **AUC-ROC ($\mathbf{0.8416}$)**, indicando a melhor capacidade de ranqueamento e distinção entre as classes.
+
+* **Para Distinção e Performance Geral (AUC-ROC):** O **XGBoost** é o vencedor.
+* **Para Melhor Precisão Geral (Acurácia):** O **KNN** possui a maior taxa de acerto ($\mathbf{0.7706}$).
+* **Para Minimizar Falsos Negativos (Recall):** O **Naive Bayes** é o modelo mais sensível aos casos positivos de diabetes ($\mathbf{0.62}$).
