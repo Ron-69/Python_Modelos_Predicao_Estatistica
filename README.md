@@ -172,6 +172,27 @@ O KNN alcançou a **maior Acurácia ($\mathbf{77.06\%}$) de todos os modelos** t
 
 O **XGBoost** demonstrou ser o modelo de árvore mais poderoso para este problema, superando o Random Forest em todas as métricas gerais de desempenho.
 
+---
+
+### 💉 Modelos Probabilísticos para Classificação (Pima Indians Diabetes)
+
+O *dataset* Pima Indians Diabetes foi utilizado para a classificação binária (Diabetes: Sim/Não), aplicando modelos que estimam probabilidades.
+
+#### Comparativo de Desempenho (Pima Indians Diabetes - Probabilísticos)
+
+| Modelo | Penalidade | Métrica de Otimização | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Naive Bayes** | Nenhuma | N/A | $0.8088$ | $0.7446$ | $\mathbf{0.62}$ |
+| **Regressão Logística** | L2 ($C=1.0$) | AUC-ROC | $\mathbf{0.8380}$ | $\mathbf{0.7446}$ | $0.52$ |
+
+#### Conclusão Parcial
+
+1.  **Regressão Logística** demonstrou ser superior em **capacidade de distinção** entre as classes (maior **AUC-ROC: 0.8380**).
+2.  O **Naive Bayes** apresentou um **Recall** superior para a classe alvo (Diabetes: $\mathbf{0.62}$), indicando que ele é mais eficaz em capturar casos positivos reais (menos falsos negativos).
+
+A **Regressão Logística** é o modelo probabilístico com melhor desempenho geral.
+
+---
 ### 💉 Modelos de Classificação (Pima Indians Diabetes)
 
 O objetivo desta etapa foi classificar se um paciente indígena Pima seria diagnosticado com diabetes (Classe 1), utilizando modelos Probabilísticos, Não Lineares (KNN) e de Ensemble.
@@ -198,20 +219,3 @@ O **XGBoost** é o modelo de melhor performance geral (AUC-ROC), mas o **KNN** o
 
 ---
 
-### 💉 Modelos Probabilísticos para Classificação (Pima Indians Diabetes)
-
-O *dataset* Pima Indians Diabetes foi utilizado para a classificação binária (Diabetes: Sim/Não), aplicando modelos que estimam probabilidades.
-
-#### Comparativo de Desempenho (Pima Indians Diabetes - Probabilísticos)
-
-| Modelo | Penalidade | Métrica de Otimização | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Naive Bayes** | Nenhuma | N/A | $0.8088$ | $0.7446$ | $\mathbf{0.62}$ |
-| **Regressão Logística** | L2 ($C=1.0$) | AUC-ROC | $\mathbf{0.8380}$ | $\mathbf{0.7446}$ | $0.52$ |
-
-#### Conclusão Parcial
-
-1.  **Regressão Logística** demonstrou ser superior em **capacidade de distinção** entre as classes (maior **AUC-ROC: 0.8380**).
-2.  O **Naive Bayes** apresentou um **Recall** superior para a classe alvo (Diabetes: $\mathbf{0.62}$), indicando que ele é mais eficaz em capturar casos positivos reais (menos falsos negativos).
-
-A **Regressão Logística** é o modelo probabilístico com melhor desempenho geral.
