@@ -96,9 +96,28 @@ Em ambos os *datasets*, a abordagem vencedora foi **priorizar a penalidade Ridge
 
 ---
 
-### 🚀 Regressão Não Linear e Métodos de Ensemble
+### 🚀 Modelos Não Linear e Métodos de Ensemble
 
-Os modelos de Regressão Não Linear (KNN) e os Métodos de Ensemble (Random Forest e XGBoost) foram aplicados ao *dataset* California Housing para capturar relações mais complexas e atingir maior precisão.
+Os modelos de Regressão Não Linear (KNN) e os Métodos de Ensemble (Random Forest e XGBoost) foram aplicados ao *dataset* California Housing para capturar relações mais complexas e atingir maior precisão. Já os modelos de Classificação Não Linear (KNN) e os modelos de Ensemble (Random Forest e XGBoost) foram aplicado ao *dataset* Pima Indian Diabetes.
+
+## ⚙️ Modelos Não Lineares e Ensembles: Versatilidade na Modelagem
+
+Os modelos de Machine Learning (ML) usados neste projeto, nomeadamente **K-Nearest Neighbors (KNN)** e os métodos de **Ensemble** (**Random Forest** e **XGBoost**), são notáveis por sua **versatilidade**.
+
+Eles são chamados de "modelos de propósito geral" porque suas estruturas podem ser adaptadas para resolver problemas de **Regressão** (previsão de um valor contínuo) e **Classificação** (previsão de uma categoria discreta) sem a necessidade de assumir relações lineares.
+
+### Justificativa da Estrutura de Notebooks
+
+A distinção entre as tarefas é feita na **função de agregação** final do algoritmo:
+
+| Tipo de Problema | O que o Modelo Previsível? | Função Final do Algoritmo | Notebook Correspondente |
+| :--- | :--- | :--- | :--- |
+| **Regressão** | Um **Valor Contínuo** (Ex: Preço de Casa) | **Média** das previsões das árvores ou vizinhos. | `02_Regression_NonLinear_and_Ensembles.ipynb` |
+| **Classificação** | Uma **Categoria Discreta** (Ex: Diabetes Sim/Não) | **Voto Majoritário** ou **Média das Probabilidades** (usando um limite de corte). | `02_Classification_NonLinear_and_Ensembles.ipynb` |
+
+Esta separação em *notebooks* dedicados garante que as métricas de avaliação e as técnicas de otimização (focadas em **RMSE/R²** para Regressão e **AUC-ROC/Acurácia** para Classificação) sejam tratadas de forma independente e adequada.
+
+### 🚀 Regressão Não Linear(KNN) e Métodos de Ensemble (Random Forest e XGBoost)
 
 #### Comparativo de Desempenho (California Housing)
 
