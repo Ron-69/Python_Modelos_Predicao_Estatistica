@@ -279,3 +279,40 @@ O modelo de melhor desempenho é o **XGBoost**, que alcançou o maior **AUC-ROC 
 * **Para Distinção e Performance Geral (AUC-ROC):** O **XGBoost** é o vencedor.
 * **Para Melhor Precisão Geral (Acurácia):** O **KNN** possui a maior taxa de acerto ($\mathbf{0.7706}$).
 * **Para Minimizar Falsos Negativos (Recall):** O **Naive Bayes** é o modelo mais sensível aos casos positivos de diabetes ($\mathbf{0.62}$).
+---
+### 🏆 Stacking Ensemble (Otimização Final do AUC-ROC)
+
+A etapa final do projeto de classificação foi a implementação do **Stacking Ensemble** (Generalização Empilhada) para tentar superar o melhor AUC-ROC individual obtido pelo XGBoost. Esta técnica profissional combina as previsões de modelos heterogêneos, utilizando um **Meta-Modelo** (Regressão Logística) para aprender a ponderar as forças e fraquezas de cada modelo base.
+
+#### Modelos Base (Base Learners)
+
+O Ensemble foi construído utilizando os quatro modelos mais performáticos de diferentes famílias:
+
+* **XGBoost:** Melhor ranqueamento (AUC-ROC).
+* **Regressão Logística:** Bom ranqueamento e modelo linear.
+* **KNN:** Melhor acurácia (Modelo não linear baseado em distância).
+* **Naive Bayes:** Melhor recall (Modelo probabilístico).
+
+#### Metodologia Stacking
+
+1.  Os modelos de base foram carregados e configurados para produzir **probabilidades** (*predict\_proba*).
+2.  O **`StackingClassifier`** foi treinado, utilizando 5-fold cross-validation (`cv=5`) para gerar o novo conjunto de dados de previsões.
+3.  O **Meta-Modelo** (`LogisticRegression`) foi ajustado neste novo conjunto de previsões.
+
+#### Resultado Final do Stacking Ensemble
+
+O Stacking Ensemble demonstrou uma melhoria no AUC-ROC, estabelecendo um novo patamar de desempenho para o projeto:
+
+| Modelo | Métrica Otimizada | AUC-ROC (Teste) | Acurácia (Teste) | Recall (Classe 1) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **XGBoost** (Melhor Individual) | AUC-ROC | $0.8416$ | $0.7576$ | $0.54$ |
+| **Stacking Ensemble** | AUC-ROC | $\mathbf{0.8421}$ | $0.74$ | $0.52$ |
+
+**Conclusão Final do Projeto:**
+
+O **Stacking Ensemble** é o **modelo final** recomendado para o problema de classificação binária no dataset Pima Indians Diabetes, pois alcançou o maior poder de distinção entre as classes ($\mathbf{0.8421}$). Embora o ganho tenha sido marginal, ele confirma a robustez do Ensemble.
+
+| Objetivo de Negócio | Modelo Recomendado | Métrica |
+| :--- | :--- | :--- |
+| **Máxima Triagem/Ranqueamento de Risco** | **Stacking Ensemble** | **AUC-ROC** |
+| **Máxima Detecção de Positivos (Sensibilidade)** | **Naive Bayes** | **Recall** ($\mathbf{0.62}$) |
